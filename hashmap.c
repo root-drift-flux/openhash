@@ -26,7 +26,7 @@ void hm_free(hashmap *h){
     if (h == NULL){
         return;
     }
-        for (int i = 0; i < h->capacity; i++){
+        for (size_t i = 0; i < h->capacity; i++){
             if (h->slots[i].state == SLOT_OCCUPIED) {
                 free(h->slots[i].key);
         }
