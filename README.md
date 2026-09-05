@@ -32,7 +32,7 @@ int      hm_remove(hashmap *h, const char *key);
 ## Building
 
 ```sh
-gcc -std=c11 -Wall -Wextra -g hashmap.c main.c -o test
+make all
 ```
 
 ## Roadmap
