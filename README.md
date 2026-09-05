@@ -37,7 +37,7 @@ gcc -std=c11 -Wall -Wextra -g hashmap.c main.c -o test
 
 ## Roadmap
 
-- [ ] Core create / free
+- [x] Core create / free
 - [ ] put / get / remove
 - [ ] Load-factor–triggered resize (rehash into a larger table)
 - [ ] Test suite + valgrind-clean
