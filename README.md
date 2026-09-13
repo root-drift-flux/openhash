@@ -38,6 +38,6 @@ make all
 ## Roadmap
 
 - [x] Core create / free
-- [ ] put / get / remove
+- [x] put / get / remove
 - [ ] Load-factor–triggered resize (rehash into a larger table)
 - [ ] Test suite + valgrind-clean
