@@ -5,7 +5,7 @@
 
 static size_t hash_key(const char *key)
 {
-    size_t hash = 14695981039346656037UL;   // FNV offset basis (64-bit) 
+    size_t hash = 14695981039346656037UL;    // FNV offset basis (64-bit) 
     for (const char *p = key; *p; p++) {
         hash ^= (unsigned char)*p;           // XOR in the byte 
         hash *= 1099511628211UL;             // multiply by FNV prime 
@@ -52,7 +52,7 @@ void hm_free(hashmap *h)
 
 int hm_put(hashmap *h, const char *key, int value) 
 {
-	size_t index = hash_key(key) % h->capacity; // add key 
+	size_t index = hash_key(key) % h->capacity;        // add key 
 
     while (h->slots[index].state == SLOT_OCCUPIED) {   // box taken?
         if (strcmp(h->slots[index].key, key) == 0) {   // by this same key?
@@ -91,6 +91,26 @@ int hm_get(hashmap *h, const char *key, int *out_value)
    return -1;
 }
 
+
+int hm_remove(hashmap *h, const char *key)
+{
+    size_t index = hash_key(key) % h->capacity;
+
+    while (h->slots[index].state != SLOT_EMPTY) {
+        if (h->slots[index].state == SLOT_OCCUPIED &&
+                strcmp(h->slots[index].key, key) == 0) {
+                free(h->slots[index].key);
+                h->slots[index].key = NULL;
+                h->slots[index].state = SLOT_TOMBSTONE;
+                h->count--;
+                return 0;
+        }
+        index = (index + 1) % h->capacity;
+
+    }
+    
+    return -1;
+}
 
 
 
